@@ -139,7 +139,7 @@
       };
       this.body = document.getElementsByTagName("body")[0];
       this.state = 'planted';
-      this.count = 3;
+      this.count = 1;
       this.drop();
     }
 
@@ -165,7 +165,7 @@
       this.bomb.style['textAlign'] = "center";
       this.bomb.style['WebkitUserSelect'] = 'none';
       this.bomb.style['font-weight'] = 700;
-      return setTimeout(this.countDown, 1000);
+      return this.explose();
     };
 
     Bomb.prototype.countDown = function() {
@@ -173,7 +173,7 @@
       this.count--;
       this.bomb.innerHTML = this.count;
       if (this.count > 0) {
-        return setTimeout(this.countDown, 1000);
+        return this.explose();
       } else {
         return this.explose();
       }
