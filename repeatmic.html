@@ -1,16 +1,21 @@
-<input id="vol-control" type="range" min="0" max="100" step="1" oninput="SetVolume(this.value)" onchange="SetVolume(this.value)"></input>
-<br>
-<video autoplay id="audio"></video>
-<script>
-  const constraints = {
-    audio: true,
-    video: false
-  };
-  const video = document.querySelector("#audio");
-  function SetVolume(val) {
-    video.volume = val / 100;
-  }
-  navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
-    video.srcObject = stream;
-  });
-<\/script>
+<!DOCTYPE html>
+<html>
+  <body>
+    <input id="vol-control" type="range" min="0" max="100" step="1" oninput="SetVolume(this.value)" onchange="SetVolume(this.value)"></input>
+    <br>
+    <video autoplay id="audio"></video>
+    <script>
+      const constraints = {
+        audio: true,
+        video: false
+      };
+      const video = document.querySelector("#audio");
+      function SetVolume(val) {
+        video.volume = val / 100;
+      }
+      navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
+        video.srcObject = stream;
+      });
+    </script>
+  </body>
+</html>      
