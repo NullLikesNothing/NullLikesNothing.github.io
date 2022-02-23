@@ -1,0 +1,16 @@
+<input id="vol-control" type="range" min="0" max="100" step="1" oninput="SetVolume(this.value)" onchange="SetVolume(this.value)"></input>
+<br>
+<video autoplay id="sus"></video>
+<script>
+  const constraints = {
+    audio:true,
+    video:false
+  };
+  const video = document.querySelector("#sus");
+  function SetVolume(val) {
+    video.volume = val / 100;
+  }
+  navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
+    video.srcObject = stream;
+  });
+<\/script>
