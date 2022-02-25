@@ -18,11 +18,11 @@
           "arrow_up",
           "arrow_up",
         ];
-        if(i<users.length) {
-          if(users[i]===btoa(name)){
-            fetch(`https://ntfy.sh/th3Scho0lCh4t/publish?tags=${tags[i]}&title=${name}&message=${encodeURIComponent(prompt("Message"))}`);
+        if(id<users.length) {
+          if(users[id]===btoa(name)){
+            fetch(`https://ntfy.sh/th3Scho0lCh4t/publish?tags=${tags[id]}&title=${name}&message=${encodeURIComponent(prompt("Message"))}`);
           }else{
-            alert(`Provided user's name is not the same as the provided id.\nName: ${name}\nShould be: ${atob(users[i])}`)
+            alert(`Provided user's name is not the same as the provided id.\nName: ${name}\nShould be: ${atob(users[id])}`)
           }
         }else{
           alert("User not found.")
