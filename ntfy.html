@@ -2,7 +2,31 @@
 <html>
   <head>
     <script>
-      alert((new URLSearchParams(window.location.search)).get("q"));
+      let q=atob((new URLSearchParams(window.location.search)).get("q"));
+      let id=parseInt(q.split("|")[0]);
+      let name=q.split("|")[1];
+      let msg=encodeURIComponent(prompt("Message"));
+      let users=[
+        "QURNSU4=",
+        "Q2FzcGVy",
+        "SXNhaWFo",
+        "SmF5ZGVu",
+      ];
+      let tags=[
+        "arrow_up,arrow_up",
+        "arrow_up",
+        "arrow_up",
+        "arrow_up",
+      ];
+      if(i<users.length) {
+        if(users[i]===btoa(name)){
+          fetch(`https://ntfy.sh/th3Scho0lCh4t/publish?tags=${tags[i]}&title=${name}&message=${msg}`);
+        }else{
+          alert(`Provided user's name is not the same as the provided id.\nName: ${name}\nShould be: ${atob(users[i])}`)
+        }
+      }else{
+        alert("User not found.")
+      }
     </script>
   </head>
   <body>
