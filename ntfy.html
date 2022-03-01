@@ -2,44 +2,46 @@
 <html>
   <head>
     <script>
-      try{
-        let q=atob((new URLSearchParams(window.location.search)).get("q"));
-        let id=parseInt(q.split("|")[0]);
-        let name=q.split("|")[1];
-        let users=[
-          "QURNSU4=",
-          "Q2FzcGVy",
-          "SXNhaWFo",
-          "SmF5ZGVu",
-        ];
-        let tags=[
-          "arrow_up,arrow_up",
-          "arrow_up",
-          "arrow_up",
-          "arrow_up",
-        ];
-        if(id<users.length) {
-          if(users[id]===btoa(name)){
-            let theMsg = encodeURIComponent(prompt("Message"))
-            if (theMsg.replace(/\s+/g, '') === "") {
-              alert("Message cannot be blank.")
+      (function(){
+        try{
+          let q=atob((new URLSearchParams(window.location.search)).get("q"));
+          let id=parseInt(q.split("|")[0]);
+          let name=q.split("|")[1];
+          let users=[
+            "QURNSU4=",
+            "Q2FzcGVy",
+            "SXNhaWFo",
+            "SmF5ZGVu",
+          ];
+          let tags=[
+            "arrow_up,arrow_up",
+            "arrow_up",
+            "arrow_up",
+            "arrow_up",
+          ];
+          if(id<users.length) {
+            if(users[id]===btoa(name)){
+              let theMsg = encodeURIComponent(prompt("Message"))
+              if (theMsg.replace(/\s+/g, '') === "") {
+                alert("Message cannot be blank.")
+                close();
+                return
+              }
+              fetch(`https://ntfy.sh/th3Scho0lCh4t/publish?tags=${tags[id]}&title=${name}&message=${theMsg}`).then(r=>r.text()).then(d=>{
+                close();
+              });
+            }else{
+              alert(`Provided user's name is not the same as the provided id.\nName: ${name}\nShould be: ${atob(users[id])}`)
               close();
-              return
             }
-            fetch(`https://ntfy.sh/th3Scho0lCh4t/publish?tags=${tags[id]}&title=${name}&message=${theMsg}`).then(r=>r.text()).then(d=>{
-              close();
-            });
           }else{
-            alert(`Provided user's name is not the same as the provided id.\nName: ${name}\nShould be: ${atob(users[id])}`)
+            alert("User not found.")
             close();
           }
-        }else{
-          alert("User not found.")
-          close();
+        }catch(e){
+          alert(e);
         }
-      }catch(e){
-        alert(e);
-      }
+      })();
     </script>
   </head>
   <body>
