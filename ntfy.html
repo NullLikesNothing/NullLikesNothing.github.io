@@ -20,17 +20,25 @@
         ];
         if(id<users.length) {
           if(users[id]===btoa(name)){
-            fetch(`https://ntfy.sh/th3Scho0lCh4t/publish?tags=${tags[id]}&title=${name}&message=${encodeURIComponent(prompt("Message"))}`).then(r=>r.text()).then(d=>{
+            let theMsg = encodeURIComponent(prompt("Message"))
+            if (theMsg.replace(/\s+/g, '') === "") {
+              alert("Message cannot be blank.")
+              close();
+              return
+            }
+            fetch(`https://ntfy.sh/th3Scho0lCh4t/publish?tags=${tags[id]}&title=${name}&message=${theMsg}`).then(r=>r.text()).then(d=>{
               close();
             });
           }else{
             alert(`Provided user's name is not the same as the provided id.\nName: ${name}\nShould be: ${atob(users[id])}`)
+            close();
           }
         }else{
           alert("User not found.")
+          close();
         }
       }catch(e){
-        alert(e)
+        alert(e);
       }
     </script>
   </head>
