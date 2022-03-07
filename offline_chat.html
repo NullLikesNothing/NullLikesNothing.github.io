@@ -59,6 +59,7 @@
         if (e.key !== 'Enter') return
         sv.postMessage([cap.reg, nameInp.value])
         nameInp.disabled = true
+        msgInp.disabled = false
       }
       msgInp.onkeydown = e => {
         if (e.key !== 'Enter') return
