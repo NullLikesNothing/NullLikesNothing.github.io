@@ -22,7 +22,7 @@ onconnect = function(e) {
         port.postMessage([cap.regerr,`User "${data[1]}" in use.`])
       } else {
         messages.push(`User "${data[1]}" has connected.`)
-        users.push(data[1])
+        users[tabs.indexOf(port)] = data[1]
       }
     } else if(data[0] === cap.msg) {
       if (data[1].startsWith('@!')) {
