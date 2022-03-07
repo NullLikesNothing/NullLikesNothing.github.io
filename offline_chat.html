@@ -1,6 +1,26 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <style>
+      body {
+        background-color: #000;
+        color: #fff;
+        width: 100vw;
+        height: 100vh;
+      }
+      #msgs {
+        display: block;
+        background-color: #444;
+        color: #fff;
+        width: 90%;
+        height: 90%;
+      }
+    </style>
+  </head>
+  <body>
+    <input id="name" placeholder="Name"><input disabled id="msg" placeholder="Message"><button id="clear">Clear messages</button>
+    <br>
+    <div id="msgs"><i>No messages...</i></div>
     <script defer>
       const messages = document.querySelector('#msgs')
       const msgInp = document.querySelector('#msg')
@@ -49,25 +69,5 @@
         sv.postMessage([cap.clr])
       }
     </script>
-    <style>
-      body {
-        background-color: #000;
-        color: #fff;
-        width: 100vw;
-        height: 100vh;
-      }
-      #msgs {
-        display: block;
-        background-color: #444;
-        color: #fff;
-        width: 90%;
-        height: 90%;
-      }
-    </style>
-  </head>
-  <body>
-    <input id="name" placeholder="Name"><input disabled id="msg" placeholder="Message"><button id="clear">Clear messages</button>
-    <br>
-    <div id="msgs"><i>No messages...</i></div>
   </body>
 </html>
