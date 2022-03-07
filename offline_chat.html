@@ -13,7 +13,7 @@
         regerr: 'REGERR',
       }
       const server = new SharedWorker("shw.js", "Server")
-      const sv = server.port
+      var sv = server.port
       sv.onmessage = e => {
         let data = e.data
         if (data[0] === cap.regerr) {
