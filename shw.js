@@ -8,11 +8,6 @@ const cap = {
   clr: 'CLR',
   regerr: 'REGERR',
 }
-const commands = {
-  kick: function(args) {
-    tabs[users.indexOf(args.join())].postMessage([cap.regerr,"Kicked"])
-  },
-}
 
 onconnect = function(e) {
   const port = e.ports[0]
@@ -30,15 +25,6 @@ onconnect = function(e) {
         users[tabs.indexOf(port)] = data[1]
       }
     } else if(data[0] === cap.msg) {
-      if (data[1].startsWith('@!')) {
-        let cmd = data[1].replace('@!','')
-        cmd = cmd.split(' ')[0]
-        let args = cmd.split(' ')
-        args = args.splice(1,args.length-1)
-        messages.push(`#${user[tabs.indexOf(port)]}`)
-        if(cmd in commands) commands[cmd](args)
-        return
-      }
       messages.push(`#${users[tabs.indexOf(port)]}: ${data[1]}`)
     } else if(data[0] === cap.dc) {
       messages.push(`User "${users[tabs.indexOf(port)]}" has disconnected.`)
