@@ -36,7 +36,7 @@ onconnect = function(e) {
         let args = cmd.split(' ')
         args = args.splice(1,args.length-1)
         messages.push(`#${user[tabs.indexOf(port)]}`)
-        if(cmd in commands) commands[cmd]()
+        if(cmd in commands) commands[cmd](args)
         return
       }
       messages.push(`#${users[tabs.indexOf(port)]}: ${data[1]}`)
