@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script defer>
+      const messages = document.querySelector('#msgs')
+      const msgInp = document.querySelector('#msg')
+      const nameInp = document.querySelector('#name')
+      let cap = {
+        msg: 'MSG',
+        dc: 'DC',
+        reg: 'REG',
+        msgs: 'MSGS',
+        regerr: 'REGERR',
+      }
+      const server = new SharedWorker("shw.js", "Server")
+      const sv = server.port
+      sv.onmessage = e => {
+        let data = e.data
+        if (data[0] === cap.regerr) {
+          nameInp.value = ''
+          nameInp.disabled = false
+          msgInp.disabled = true
+          msgInp.value = ''
+          nameInp.focus();
+        }
+      }
+      nameInp.onkeydown = e => {
+        if (e.key !== 'Enter') return
+        sv.postMessage([cap.reg, nameInp.value])
+        nameInp.disabled = true
+      }
+      msgInp.onkeydown = e => {
+        if (e.key !== 'Enter') return
+        sv.postMessage([cap.msg, msgInp.value])
+        msgInp.value = '';
+      }
+    </script>
+    <style>
+      body {
+        background-color: #000;
+        color: #fff;
+      }
+      #msgs {
+        background-color: #333;
+        color: #fff;
+        width: 90%;
+        height: 90%;
+      }
+    </style>
+  </head>
+  <body>
+    <input id="name" placeholder="Name"><input disabled id="msg" placeholder="Message">
+    <br>
+    <div id="msgs"></div>
+  </body>
+</html>
