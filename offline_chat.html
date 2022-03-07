@@ -9,19 +9,30 @@
         msg: 'MSG',
         dc: 'DC',
         reg: 'REG',
-        msgs: 'MSGS',
+        clr: 'CLR',
         regerr: 'REGERR',
       }
       const server = new SharedWorker("shw.js", "Server")
       var sv = server.port
+      
+      window.onunload = () => {
+        sv.postMessage([cap.dc])
+      }
+      
       sv.onmessage = e => {
         let data = e.data
+        console.log(data)
         if (data[0] === cap.regerr) {
           nameInp.value = ''
           nameInp.disabled = false
           msgInp.disabled = true
           msgInp.value = ''
           nameInp.focus();
+        } else if (data[0] === cap.msg) {
+          messages.innerText = ''
+          data[1].forEach(msg => {
+            messages.innerText += msg + "\n"
+          });
         }
       }
       nameInp.onkeydown = e => {
@@ -33,6 +44,9 @@
         if (e.key !== 'Enter') return
         sv.postMessage([cap.msg, msgInp.value])
         msgInp.value = '';
+      }
+      document.querySelector('#clear').onclick = () => {
+        sv.postMessage([cap.clr])
       }
     </script>
     <style>
@@ -52,7 +66,7 @@
     </style>
   </head>
   <body>
-    <input id="name" placeholder="Name"><input disabled id="msg" placeholder="Message">
+    <input id="name" placeholder="Name"><input disabled id="msg" placeholder="Message"><button id="clear">Clear messages</button>
     <br>
     <div id="msgs"><i>No messages...</i></div>
   </body>
