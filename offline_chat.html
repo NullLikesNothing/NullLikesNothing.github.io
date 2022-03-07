@@ -47,7 +47,7 @@
           nameInp.disabled = false
           msgInp.disabled = true
           msgInp.value = ''
-          nameInp.focus();
+          nameInp.focus()
         } else if (data[0] === cap.msg) {
           messages.innerText = ''
           data[1].forEach(msg => {
@@ -59,12 +59,15 @@
         if (e.key !== 'Enter') return
         sv.postMessage([cap.reg, nameInp.value])
         nameInp.disabled = true
+        msgInp.value = ''
         msgInp.disabled = false
+        msgInp.focus()
       }
       msgInp.onkeydown = e => {
         if (e.key !== 'Enter') return
         sv.postMessage([cap.msg, msgInp.value])
         msgInp.value = '';
+        msgInp.focus()
       }
       document.querySelector('#clear').onclick = () => {
         sv.postMessage([cap.clr])
