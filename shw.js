@@ -27,6 +27,10 @@ onconnect = function(e) {
     } else if(data[0] === cap.msg) {
       messages.push(`#${users[tabs.indexOf(port)]}: ${data[1]}`)
     } else if(data[0] === cap.dc) {
+      if (users[tabs.indexOf(port)] == undefined) {
+        tabs.splice(tabs.indexOf(port),1)
+        return
+      }
       messages.push(`User "${users[tabs.indexOf(port)]}" has disconnected.`)
       users.splice(tabs.indexOf(port),1)
       tabs.splice(tabs.indexOf(port),1)
