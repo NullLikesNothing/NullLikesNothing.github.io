@@ -36,7 +36,10 @@ onconnect = function(e) {
       tabs.splice(tabs.indexOf(port),1)
     } else if(data[0] === cap.clr) {
       messages.length = 0
-    } else {
+    } else if(data[0] === cap.regerr) {
+      let target = data[1]
+      tabs[users.indexOf(target)].postMessage([cap.regerr,"Internal error"])
+    }else {
       port.postMessage([cap.regerr,`Invalid command ${data[0]}.`])
       return
     }
