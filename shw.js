@@ -7,6 +7,7 @@ const cap = {
   reg: 'REG',
   clr: 'CLR',
   regerr: 'REGERR',
+  ref: 'REF',
 }
 
 onconnect = function(e) {
@@ -38,8 +39,14 @@ onconnect = function(e) {
       messages.length = 0
     } else if(data[0] === cap.regerr) {
       let target = data[1]
+      if (users.indexOf(target) === -1) return
+      messages.push(`User "${target}" has disconnected.`)
       tabs[users.indexOf(target)].postMessage([cap.regerr,"Internal error"])
-    }else {
+    } else if(data[0] === cap.ref) {
+      tabs.forEach(instance => {
+        instance.postMessage([cap.ref]);
+      });
+    } else {
       port.postMessage([cap.regerr,`Invalid command ${data[0]}.`])
       return
     }
