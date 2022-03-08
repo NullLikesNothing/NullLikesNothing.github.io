@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <body>
-  <script src="//cdn.jsdelivr.net/npm/eruda" onload="eruda.init()"></script>
+  <script defer src="//cdn.jsdelivr.net/npm/eruda" onload="eruda.init()"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/eruda-code@2.0.0"></script>
   <script>
     var server = new SharedWorker("shw.js", "Server")
     var sv = server.port
