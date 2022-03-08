@@ -4,6 +4,9 @@
   <script>
     var server = new SharedWorker("shw.js", "Server")
     var sv = server.port
+    sv.onmessage = e => {
+      console.log(e.data)
+    }
     console.log('Shared worker session started')
   </script>
   Use console.
