@@ -64,6 +64,13 @@
           console.warn(`Got unknown command "${data[0]}".`,data)
         }
       }
+      let tmp_name = (new URLSearchParams(window.location.search)).get(prompt('name'))
+      if (tmp_name != null) {
+        sv.postMessage([cap.reg,tmp_name])
+        nameInp.disabled = true
+        msgInp.disabled = false
+        msgInp.focus()
+      }
       nameInp.onkeydown = e => {
         if (e.key !== 'Enter') return
         sv.postMessage([cap.reg, nameInp.value])
