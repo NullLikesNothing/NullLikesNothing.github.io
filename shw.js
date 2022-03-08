@@ -15,6 +15,7 @@ const cap = {
   regerr: 'REGERR',
   ref: 'REF',
   ban: 'BAN',
+  sban: 'SBAN',
   unban: 'UNBAN',
   nop: 'NOP',
 }
@@ -67,7 +68,7 @@ onconnect = function(e) {
       tabs.forEach(instance => {
         instance.postMessage([cap.ref]);
       });
-    } else if (data[0] === cap.ban) {
+    } else if (data[0] === cap.ban || data[0] === cap.sban ) {
       let target_ban = data[1]
       if (users.indexOf(target_ban) === -1) {
         port.postMessage([cap.nop, `User "${target_ban}" not found.`])
@@ -75,7 +76,7 @@ onconnect = function(e) {
       } else if (banned.indexOf(target_ban) === -1) {
         banned.push(target_ban)
         port.postMessage([cap.nop, `User "${target_ban}" banned.`])
-        messages.push(`User "${target_ban}" has disconnected"`)
+        if (data[0] === cap.ban) messages.push(`User "${target_ban}" has disconnected"`)
       }
     } else if (data[0] === cap.unban) {
       let target_unban = data[1]
