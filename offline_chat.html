@@ -32,6 +32,7 @@
         clr: 'CLR',
         regerr: 'REGERR',
         ref: 'REF',
+        nop: 'NOP',
       }
       const server = new SharedWorker("shw.js", "Server")
       var sv = server.port
@@ -56,6 +57,8 @@
           });
         } else if (data[0] === cap.ref) {
           location.reload();
+        } else if (data[0] === cap.nop) {
+          console.log(`${data[1]}`)
         } else {
           console.warn(`Got unknown command "${data[0]}".`,data)
         }
