@@ -1,6 +1,10 @@
-<script>
-  var server = new SharedWorker("shw.js", "Server")
-  var sv = server.port
-  console.log('Shared worker session started')
-</script>
-Use console.
+<!DOCTYPE html>
+<body>
+  <script src="//cdn.jsdelivr.net/npm/eruda" onload="eruda.init()"></script>
+  <script>
+    var server = new SharedWorker("shw.js", "Server")
+    var sv = server.port
+    console.log('Shared worker session started')
+  </script>
+  Use console.
+</body>
