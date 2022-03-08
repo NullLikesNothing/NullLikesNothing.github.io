@@ -64,7 +64,7 @@
           console.warn(`Got unknown command "${data[0]}".`,data)
         }
       }
-      let tmp_name = (new URLSearchParams(window.location.search)).get(prompt('name'))
+      let tmp_name = (new URLSearchParams(window.location.search)).get('name')
       if (tmp_name != null) {
         sv.postMessage([cap.reg,tmp_name])
         nameInp.disabled = true
