@@ -24,7 +24,7 @@ let banInt = setInterval(() => {
   banned.forEach(usr => {
     if (users.indexOf(usr) === -1) return
     tabs[users.indexOf(usr)].postMessage(["REGERR", "BANNED"])
-    users[users.indexOf(usr)] = null
+    users[users.indexOf(usr)] = undefined
   })
 }, 100)
 
@@ -38,6 +38,10 @@ onconnect = function(e) {
 
     if (data[0] === cap.reg || data[0] === cap.sreg) {
       if (users.indexOf(data[1]) === -1) {
+        if (banned.indexOf(data[1])) {
+          port.postMessage([cap.regerr,"BANNED"])
+          return
+        }
         if (data[0] === cap.reg) messages.push(`User "${data[1]}" has connected.`)
         users[tabs.indexOf(port)] = data[1]
       } else {
@@ -68,12 +72,22 @@ onconnect = function(e) {
     } else if (data[0] === cap.ban) {
       let target_ban = data[1]
       if (users.indexOf(target_ban) === -1) {
-        port.postMessage([cap.nop, `User ${target_ban} not found.`])
+        port.postMessage([cap.nop, `User "${target_ban}" not found.`])
         return
-      } else if (banned.indexOf(target_ban) !== -1) {
-        
+      } else if (banned.indexOf(target_ban) === -1) {
+        banned.push(target_ban)
+        port.postMessage([cap.nop, `User "${target_ban}" banned.`])
       }
       banned.push()
+    } else if (data[0] === cap.unban) {
+      let target_unban = data[1]
+      if (banned.indexOf(target_unban) === -1) {
+        port.postMessage([cap.nop, `User "${target_unban}" not found.`])
+        return
+      } else if (banned.indexOf(target_unban) !== -1) {
+        banned.splice(banned.indexOf(target_unban),1)
+        port.postMessage([cap.nop, `User "${target_unban}" unbanned.`])
+      }
     } else {
       port.postMessage([cap.nop, `Invalid command ${data[0]}.`])
       return
