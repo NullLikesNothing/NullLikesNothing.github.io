@@ -1,5 +1,4 @@
 /* TODO:
- * add NOP code
  * fix bugs
  */
 
@@ -76,8 +75,8 @@ onconnect = function(e) {
       } else if (banned.indexOf(target_ban) === -1) {
         banned.push(target_ban)
         port.postMessage([cap.nop, `User "${target_ban}" banned.`])
+        messages.push(`User "${target_ban}" has disconnected"`)
       }
-      banned.push()
     } else if (data[0] === cap.unban) {
       let target_unban = data[1]
       if (banned.indexOf(target_unban) === -1) {
