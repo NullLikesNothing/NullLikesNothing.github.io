@@ -68,6 +68,7 @@
       if (tmp_name != null) {
         sv.postMessage([cap.reg,tmp_name])
         nameInp.disabled = true
+        nameInp.value = tmp_name
         msgInp.disabled = false
         msgInp.focus()
       }
