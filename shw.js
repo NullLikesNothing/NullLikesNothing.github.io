@@ -38,7 +38,7 @@ onconnect = function(e) {
 
     if (data[0] === cap.reg || data[0] === cap.sreg) {
       if (users.indexOf(data[1]) === -1) {
-        if (banned.indexOf(data[1])) {
+        if (banned.indexOf(data[1]) !== -1) {
           port.postMessage([cap.regerr,"BANNED"])
           return
         }
