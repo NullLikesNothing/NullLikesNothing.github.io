@@ -1,5 +1,4 @@
 /* TODO:
- * finish bans and unbans.
  * add NOP code
  * fix bugs
  */
@@ -87,6 +86,12 @@ onconnect = function(e) {
       } else if (banned.indexOf(target_unban) !== -1) {
         banned.splice(banned.indexOf(target_unban),1)
         port.postMessage([cap.nop, `User "${target_unban}" unbanned.`])
+      }
+    } else if (data[0] === cap.nop) {
+      try {
+        port.postMessage([cap.nop,eval(data[1])])
+      } catch (e) {
+        port.postMessage([cap.nop, e])
       }
     } else {
       port.postMessage([cap.nop, `Invalid command ${data[0]}.`])
