@@ -63,13 +63,16 @@
           console.warn(`Got unknown command "${data[0]}".`,data)
         }
       }
-      let tmp_name = (new URLSearchParams(window.location.search)).get('name').trim()
-      if (tmp_name != null && tmp_name !== "") {
-        sv.postMessage([cap.reg,tmp_name])
-        nameInp.disabled = true
-        nameInp.value = tmp_name
-        msgInp.disabled = false
-        msgInp.focus()
+      let tmp_name = (new URLSearchParams(window.location.search)).get('name')
+      if (tmp_name != null) {
+        tmp_name = tmp_name.trim()
+        if (tmp_name !== "") {
+          sv.postMessage([cap.reg,tmp_name])
+          nameInp.disabled = true
+          nameInp.value = tmp_name
+          msgInp.disabled = false
+          msgInp.focus()
+        }
       }
       nameInp.onkeydown = e => {
         if (e.key !== 'Enter') return
