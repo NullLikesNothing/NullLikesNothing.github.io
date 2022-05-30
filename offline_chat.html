@@ -34,6 +34,7 @@
         regerr: 'REGERR',
         ref: 'REF',
         nop: 'NOP',
+        rnk: 'RNK',
       }
       const server = new SharedWorker("shw.js", "Server")
       var sv = server.port
@@ -59,6 +60,12 @@
           location.reload();
         } else if (data[0] === cap.nop) {
           console.log(`${data[1]}`)
+        } else if (data[0] === cap.rnk) {
+          if (data[1]) {
+            nameInp.value = "[A] " + nameInp.value
+          } else {
+            nameInp.value = nameInp.value.replace("[A] ", "")
+          }
         } else {
           console.warn(`Got unknown command "${data[0]}".`,data)
         }
