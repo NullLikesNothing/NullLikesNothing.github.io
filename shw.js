@@ -41,13 +41,15 @@ onconnect = function(e) {
     const data = ev.data;
     if (data[0] === cap.adm) {
       let usr = data[1]
+      let add = true
+      if (data[1] == null || data[1] == undefined) add = false
       if (admin.length === 0) admin.push(port)
       if (users.indexOf(usr) === -1 && (data[1] != null || data[1] != undefined)) return port.postMessage([cap.nop, "User not found."])
       let user = tabs[users.indexOf(usr)]
       if (admin.indexOf(port) === -1) return port.postMessage([cap.nop, notadm])
-      if (admin.indexOf(user) !== -1) return port.postMessage([cap.nop, "User is already admin!"])
-      admin.push(user)
-      user.postMessage([cap.rnk,true])
+      add?if (admin.indexOf(user) !== -1) return port.postMessage([cap.nop, "User is already admin!"])
+      add?admin.push(user)
+      add?user.postMessage([cap.rnk,true])
       users[users.indexOf(usr)] = "[A] " + users[users.indexOf(usr)]
     } else if (data[0] === cap.unadm) {
       if (admin.indexOf(port) === -1) return port.postMessage([cap.nop, notadm])
