@@ -52,7 +52,6 @@ onconnect = function(e) {
       if (admin.indexOf(user) !== -1) return port.postMessage([cap.nop, "User is already admin!"])
       admin.push(user)
       user.postMessage([cap.rnk,true])
-      users[users.indexOf(usr)] = "[A] " + users[users.indexOf(usr)]
     } else if (data[0] === cap.unadm) {
       if (admin.indexOf(port) === -1) return port.postMessage([cap.nop, notadm])
       let usr = data[1]
@@ -62,7 +61,6 @@ onconnect = function(e) {
       if (admin.indexOf(user) === -1) return port.postMessage([cap.nop, "User is not admin!"])
       admin.splice(admin.indexOf(user),1)
       user.postMessage([cap.rnk,false])
-      users[users.indexOf(usr)] = users[users.indexOf(usr)].replace(["[A] ",""])
     } else if (data[0] === cap.reg || data[0] === cap.sreg) {
       if (data[1].trim() === "") return port.postMessage([cap.regerr, "Name cannot be blank or whitespace!"])
       data[1] = data[1].replaceAll("[A] ", "")
