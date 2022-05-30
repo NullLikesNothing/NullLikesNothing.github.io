@@ -44,7 +44,6 @@
       
       sv.onmessage = e => {
         let data = e.data
-        console.log(data)
         if (data[0] === cap.regerr) {
           nameInp.value = ''
           nameInp.disabled = false
