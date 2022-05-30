@@ -76,7 +76,7 @@ onconnect = function(e) {
       } else if (banned.indexOf(target_ban) === -1) {
         banned.push(target_ban)
         port.postMessage([cap.nop, `User "${target_ban}" banned.`])
-        if (data[0] === cap.ban) messages.push(`User "${target_ban}" has disconnected"`)
+        if (data[0] === cap.ban) messages.push(`User "${target_ban}" has disconnected`)
       }
     } else if (data[0] === cap.unban) {
       let target_unban = data[1]
