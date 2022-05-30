@@ -77,11 +77,10 @@ onconnect = function(e) {
       if (port !== admin) return port.postMessage([cap.nop, notadm])
       let target_ban = data[1]
       if (users.indexOf(target_ban) === -1) return port.postMessage([cap.nop, `User "${target_ban}" not found.`])
-      } else if (banned.indexOf(target_ban) === -1) {
-        banned.push(target_ban)
-        port.postMessage([cap.nop, `User "${target_ban}" banned.`])
-        if (data[0] === cap.ban) messages.push(`User "${target_ban}" has disconnected`)
-      }
+      if (banned.indexOf(target_ban) !== -1) return
+      banned.push(target_ban)
+      port.postMessage([cap.nop, `User "${target_ban}" banned.`])
+      if (data[0] === cap.ban) messages.push(`User "${target_ban}" has disconnected`)
     } else if (data[0] === cap.unban) {
       if (port !== admin) return port.postMessage([cap.nop, notadm])
       let target_unban = data[1]
