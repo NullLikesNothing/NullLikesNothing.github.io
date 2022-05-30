@@ -44,6 +44,7 @@ onconnect = function(e) {
       if (port !== admin) return port.postMessage([cap.nop, notadm])
       admin = null
     } else if (data[0] === cap.reg || data[0] === cap.sreg) {
+      if (data[1].trim() === "") return port.postMessage([cap.regerr, "Name cannot be blank or whitespace!"])
       if (users.indexOf(data[1]) === -1) {
         if (banned.indexOf(data[1]) !== -1) return port.postMessage([cap.regerr,"BANNED"])
         if (data[0] === cap.reg) messages.push(`User "${data[1]}" has connected.`)
