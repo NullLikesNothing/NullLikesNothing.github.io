@@ -73,6 +73,7 @@
       }
       nameInp.onkeydown = e => {
         if (e.key !== 'Enter') return
+        if (nameInp.value.trim() === "") return alert("Name cannot be blank or whitespace!")
         sv.postMessage([cap.reg, nameInp.value])
         nameInp.disabled = true
         msgInp.value = ''
