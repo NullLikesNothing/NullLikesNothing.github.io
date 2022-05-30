@@ -47,6 +47,7 @@ onconnect = function(e) {
       if (users.indexOf(usr) === -1 && (data[1] != null || data[1] != undefined)) return port.postMessage([cap.nop, "User not found."])
       let user = tabs[users.indexOf(usr)]
       if (admin.indexOf(port) === -1) return port.postMessage([cap.nop, notadm])
+      port.postMessage([cap.rnk,true])
       if (!add) return
       if (admin.indexOf(user) !== -1) return port.postMessage([cap.nop, "User is already admin!"])
       admin.push(user)
